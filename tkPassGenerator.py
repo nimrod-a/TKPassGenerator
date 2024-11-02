@@ -1,6 +1,7 @@
 import random
 import string
 from tkinter import *
+import pyperclip
 
 # initialize window
 root = Tk()
@@ -55,6 +56,10 @@ def randPassGenerator():
     output_pass.set(password)
 
 
+def copyPass():
+    pyperclip.copy(output_pass.get())
+
+
 pass_head = Label(root, text='Pass Length',
                   font='arial 14 bold').pack(pady=10)
 
@@ -86,5 +91,10 @@ generate_pass_button.pack(pady=20)
 pass_label = Label(root, text='Random Generated Password',
                    font='arial 12 bold').pack(pady="30 10")
 Entry(root, textvariable=output_pass, width=32, font='arial 16').pack()
+
+# copy to clipboard button
+copy_to_clipboard = Button(root, text='Copy to Clipboard', command=copyPass, font="Arial 11",
+                           bg='lightblue', fg='black', activebackground="teal", padx=5, pady=5)
+copy_to_clipboard.pack(pady=20)
 
 root.mainloop()
