@@ -28,7 +28,7 @@ with open('eff_large_wordlist.txt', 'r') as f:
     wordlist = [line.strip() for line in f]
 
 
-def randPassGenerator():
+def pass_gen():
     password = ""
     # generate passphrase if checkbox is checked
     if is_passphrase.get():
@@ -56,7 +56,7 @@ def randPassGenerator():
     output_pass.set(password)
 
 
-def copyPass():
+def copy_pass():
     pyperclip.copy(output_pass.get())
 
 
@@ -75,8 +75,8 @@ def update_scale_color(value):
     length.config(bg=f'#{red:02x}{green:02x}00')
 
 
-pass_head = Label(root, text='Pass Length',
-                  font='arial 14 bold').pack(pady=10)
+pass_head = (Label(root, text='Pass Length', font='arial 14 bold'))
+pass_head.pack(pady=10)
 
 pass_len = IntVar()
 length = Scale(root, from_=4, to_=12 if is_passphrase.get() else 32,
@@ -102,16 +102,16 @@ passphrase_checkbox = Checkbutton(root, text='Generate Passphrase', variable=is_
 passphrase_checkbox.pack(pady=10)
 
 # generate password button
-generate_pass_button = Button(root, command=randPassGenerator, text="Generate Pass", font="Arial 11 bold",
+generate_pass_button = Button(root, command=pass_gen, text="Generate Pass", font="Arial 11 bold",
                               bg='lightblue', fg='black', activebackground="teal", padx=5, pady=5)
 generate_pass_button.pack(pady=20)
 
-pass_label = Label(root, text='Random Generated Password',
-                   font='arial 12 bold').pack(pady="30 10")
+pass_label = (Label(root, text='Random Generated Password', font='arial 12 bold'))
+pass_label.pack(pady="30 10")
 Entry(root, textvariable=output_pass, width=32, font='arial 16').pack()
 
 # copy to clipboard button
-copy_to_clipboard = Button(root, text='Copy to Clipboard', command=copyPass, font="Arial 11",
+copy_to_clipboard = Button(root, text='Copy to Clipboard', command=copy_pass, font="Arial 11",
                            bg='lightblue', fg='black', activebackground="teal", padx=5, pady=5)
 copy_to_clipboard.pack(pady=20)
 
