@@ -60,6 +60,21 @@ def copyPass():
     pyperclip.copy(output_pass.get())
 
 
+def update_scale_color(value):
+    value = int(value)
+    # update color scaling based on pass type
+    if include_special.get():
+        secure_value = 20
+    elif is_passphrase.get():
+        secure_value = 8
+    else:
+        secure_value = 32
+    normalized_value = value / secure_value
+    red = int(255 * (1 - normalized_value))
+    green = int(255 * normalized_value)
+    length.config(bg=f'#{red:02x}{green:02x}00')
+
+
 pass_head = Label(root, text='Pass Length',
                   font='arial 14 bold').pack(pady=10)
 
@@ -67,6 +82,9 @@ pass_len = IntVar()
 length = Scale(root, from_=4, to_=12 if is_passphrase.get() else 32,
                variable=pass_len, orient=HORIZONTAL, length=200, font='arial 16')
 length.pack()
+
+# bind the scale to update color when value changes
+length.bind("<Motion>", lambda event: update_scale_color(length.get()))
 
 # checkbox for special characters, unless passphrase checked
 include_special_checkbox = Checkbutton(root, text='Include Special Characters', variable=include_special,
