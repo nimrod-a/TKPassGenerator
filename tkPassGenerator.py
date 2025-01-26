@@ -94,7 +94,7 @@ include_special_checkbox.pack(pady=15)
 # checkbox for passphrase
 passphrase_checkbox = Checkbutton(root, text='Generate Passphrase', variable=is_passphrase, command=lambda: [
     # update length if checked
-    length.config(to=12 if is_passphrase.get() else 64),
+    length.config(to=12 if is_passphrase.get() else 32),
     # grey out special character checkbox if checked
     include_special_checkbox.config(
         state=DISABLED if is_passphrase.get() else NORMAL)
@@ -106,7 +106,8 @@ generate_pass_button = Button(root, command=pass_gen, text="Generate Pass", font
                               bg='lightblue', fg='black', activebackground="teal", padx=5, pady=5)
 generate_pass_button.pack(pady=20)
 
-pass_label = (Label(root, text='Random Generated Password', font='arial 12 bold'))
+pass_label = (
+    Label(root, text='Random Generated Password', font='arial 12 bold'))
 pass_label.pack(pady="30 10")
 Entry(root, textvariable=output_pass, width=32, font='arial 16').pack()
 
